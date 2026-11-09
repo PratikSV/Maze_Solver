@@ -100,7 +100,4 @@ Feel free to open issues or submit pull requests.  When adding new functionality
 - Preserve the existing DFS/BFS step shape (`Step` type) to keep the visualiser consistent.
 - Add or update tests in `src/__tests__` if you introduce new logic.
 
----
 
-## 📄 License
-This project is provided under the **MIT License**. See `LICENSE` for details.
