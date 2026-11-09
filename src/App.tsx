@@ -21,7 +21,7 @@ const App = () => {
   const [speed, setSpeed] = useState<number>(100);
   const [tool, setTool] = useState<Tool>("wall");
 
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<number | null>(null);
 
   // playback control
   const startPlayback = () => {
@@ -88,9 +88,7 @@ const App = () => {
       {/* Header */}
       <header className="p-4 bg-panel flex justify-between items-center shadow">
         <h1 className="font-serif text-2xl">Interactive Maze Solver</h1>
-        <a href="#" className="underline text-ink">
-          GitHub (placeholder)
-        </a>
+
       </header>
 
       {/* Main layout */}
