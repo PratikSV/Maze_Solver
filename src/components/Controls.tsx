@@ -1,5 +1,5 @@
 // src/components/Controls.tsx
-import { Tool } from "../types";
+import { Tool, Algorithm } from "../types";
 
 type Props = {
   playing: boolean;
@@ -13,6 +13,8 @@ type Props = {
   setSpeed: (ms: number) => void;
   tool: Tool;
   setTool: (t: Tool) => void;
+  algorithm: Algorithm;
+  setAlgorithm: (a: Algorithm) => void;
   disabled: boolean;
 };
 

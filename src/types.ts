@@ -1,4 +1,5 @@
-// src/types.ts
+export type Algorithm = "DFS" | "BFS";
+
 export type Position = { row: number; col: number };
 
 export type Cell = 0 | 1; // 0 = empty, 1 = wall

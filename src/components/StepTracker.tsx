@@ -1,5 +1,9 @@
 // src/components/StepTracker.tsx
-import { Step } from "../types";
+import { useState } from "react";
+import { Step, Position } from "../types";
+
+
+
 
 type Props = {
   steps: Step[];
@@ -7,6 +11,7 @@ type Props = {
 };
 
 export const StepTracker = ({ steps, currentIndex }: Props) => {
+  const [showDetails, setShowDetails] = useState(false);
   const currentStep = steps[currentIndex] ?? null;
 
   const statusBadge = () => {
@@ -38,26 +43,47 @@ export const StepTracker = ({ steps, currentIndex }: Props) => {
         <div>Stack size: {currentStep?.stack.length ?? 0}</div>
       </div>
 
-      {/* Live Stack */}
-      <div className="flex-1 overflow-y-auto border border-ink p-2 rounded text-sm font-mono text-ink">
-        <div className="font-serif mb-1">Current Stack (top ↓)</div>
-        {currentStep?.stack
-          .slice()
-          .reverse()
-          .map((p, i) => (
-            <div key={i}>[{p.row}, {p.col}]</div>
-          ))}
-      </div>
+      {/* Toggle button */}
+      {!showDetails && (
+        <button
+          className="mt-2 w-full bg-start text-white py-1 rounded hover:bg-brave-dark"
+          onClick={() => setShowDetails(true)}
+        >
+          Show Details
+        </button>
+      )}
 
-      {/* Event Log */}
-      <div className="flex-1 overflow-y-auto border border-ink p-2 rounded text-sm font-mono text-ink">
-        <div className="font-serif mb-1">Event Log</div>
-        {logLines.map((s, i) => (
-          <div key={i} className={s.type === "PUSH" ? "text-push" : "text-pop"}>
-            {`${s.type} [${s.row}, ${s.col}]`}
+      {/* Details (stack + log) */}
+      {showDetails && (
+        <>
+          <button
+            className="self-end text-sm text-ink underline mb-1"
+            onClick={() => setShowDetails(false)}
+          >
+            Close
+          </button>
+          {/* Live Stack */}
+          <div className="flex-1 overflow-y-auto border border-ink p-2 rounded text-sm font-mono text-ink">
+            <div className="font-serif mb-1">Current Stack (top ↓)</div>
+            {currentStep?.stack
+              .slice()
+              .reverse()
+              .map((p: Position, i) => (
+                <div key={i}>[{p.row}, {p.col}]</div>
+              ))}
           </div>
-        ))}
-      </div>
+
+          {/* Event Log */}
+          <div className="flex-1 overflow-y-auto border border-ink p-2 rounded text-sm font-mono text-ink">
+            <div className="font-serif mb-1">Event Log</div>
+            {logLines.map((s, i) => (
+              <div key={i} className={s.type === "PUSH" ? "text-push" : "text-pop"}>
+                {`${s.type} [${s.row}, ${s.col}]`}
+              </div>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 };

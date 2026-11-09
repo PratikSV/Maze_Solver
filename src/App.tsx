@@ -1,6 +1,6 @@
 // src/App.tsx
 import { useState, useEffect, useRef } from "react";
-import { Grid, Position, Step, Tool } from "./types";
+import { Grid, Position, Step, Tool, Algorithm } from "./types";
 import { createEmptyGrid, generateRandomMaze } from "./logic/maze";
 import { dfs } from "./logic/dfs";
 import { GridComponent } from "./components/Grid";
@@ -51,8 +51,15 @@ const App = () => {
   };
 
   const randomMaze = () => {
-    setGrid(prev => generateRandomMaze(prev, start, end));
-  };
+  // generate a fresh empty grid then fill with random walls
+  const newGrid = generateRandomMaze(createEmptyGrid(), start, end);
+  setGrid(newGrid);
+  // reset any ongoing playback or logs
+  setSteps([]);
+  setStepIdx(-1);
+  setPlaying(false);
+  setPaused(false);
+};
 
   // interval side‑effect
   useEffect(() => {
