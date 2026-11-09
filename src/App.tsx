@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { Grid, Position, Step, Tool, Algorithm } from "./types";
 import { createEmptyGrid, generateRandomMaze } from "./logic/maze";
 import { dfs } from "./logic/dfs";
+import { bfs } from "./logic/bfs";
 import { GridComponent } from "./components/Grid";
 import { Controls } from "./components/Controls";
 import { StepTracker } from "./components/StepTracker";
@@ -20,6 +21,7 @@ const App = () => {
   const [paused, setPaused] = useState(false);
   const [speed, setSpeed] = useState<number>(100);
   const [tool, setTool] = useState<Tool>("wall");
+  const [algorithm, setAlgorithm] = useState<Algorithm>("DFS");
 
   const intervalRef = useRef<number | null>(null);
 
@@ -114,6 +116,8 @@ const App = () => {
             setSpeed={setSpeed}
             tool={tool}
             setTool={setTool}
+            algorithm={algorithm}
+            setAlgorithm={setAlgorithm}
             disabled={playing && !paused}
           />
         </section>

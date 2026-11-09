@@ -61,3 +61,4 @@ export const bfs = (grid: Grid, start: Position, end: Position): Step[] => {
   steps.push({ type: "NO_PATH", row: -1, col: -1, stack: [] });
   return steps;
 };
+
